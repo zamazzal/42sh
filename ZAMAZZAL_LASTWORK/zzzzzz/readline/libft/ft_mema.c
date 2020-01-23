@@ -6,18 +6,21 @@
 /*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 05:30:47 by hessabra          #+#    #+#             */
-/*   Updated: 2019/10/10 20:18:15 by hessabra         ###   ########.fr       */
+/*   Updated: 2020/01/23 22:38:22 by zamazzal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		*ft_memalloc(size_t size)
+void	*ft_mema(size_t size)
 {
-	void	*ptr;
+	void *ptr;
 
 	ptr = malloc(size);
 	if (ptr)
 		ft_bzero(ptr, size);
+	else
+		exit(1);
 	return (ptr);
 }
+

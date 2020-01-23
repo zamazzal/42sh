@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include "../includes/parsing.h"
 
 void    complet_type(char **cmd, t_ushort dernier_type)
@@ -22,12 +19,12 @@ void    complet_type(char **cmd, t_ushort dernier_type)
 
     complet = NULL;
     if (dernier_type == PIPE)
-        prompt = "pipe> ";
+        prompt = "pipe> \n";
     else if (dernier_type == AND)
-        prompt = "cmdand> ";
+        prompt = "cmdand> \n";
     else if (dernier_type == OUR)
-        prompt = "cmdor> ";
-    complet = readline(prompt);
+        prompt = "cmdor> \n";
+    complet = ft_readline(prompt);
     argument_join(cmd, complet);
     free(complet);
 }

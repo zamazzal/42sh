@@ -41,8 +41,8 @@ void    exec_lstparse(t_objet *objet)
     objet->execution = lst;
     while (objet->execution)
     {
-        if (objet->execution->pipe || !(status = is_abuiltin(objet, objet->execution->cmd, NULL, objet->environ)))
-            status = exec_lstpipe(objet->execution, objet->environ);
+        if (objet->execution->pipe || !(status = is_abuiltin(objet, objet->execution->cmd, NULL, g_environ)))
+            status = exec_lstpipe(objet->execution, g_environ);
         if ((WIFSIGNALED(status) || WIFSTOPPED(status) || (WIFEXITED(status) && WEXITSTATUS(status) != 0)) && objet->execution->if_fail)
             objet->execution = objet->execution->if_fail;
         else if (WIFEXITED(status) && WEXITSTATUS(status) == 0 && objet->execution->if_seccess)
@@ -54,41 +54,4 @@ void    exec_lstparse(t_objet *objet)
         }
         objet->exec_mode = 0;
     }
-}
-
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "../includes/get_next_line.h"
-
-int main()
-{
-    t_objet     **objet;
-    extern char **environ;
-    char        *line;
-    char        *tmp;
-
-    sig_init();
-    objet = save_objet();
-    if (!(*objet = (t_objet*)ft_memalloc(sizeof(t_objet))))
-        return (ft_perror("42sh: malloc"));
-    (*objet)->environ = environ;
-    while (1)
-    {
-        if ((line = readline("\033[1;36m42sh$> \033[0m")) > 0)
-		{
-            tmp = line;
-            line = ft_strtrim(line);
-            free(tmp);
-            if (!ft_strncmp(line, "exit", 4))
-            {
-                free(line);
-                return (0);
-            }
-            if (((*objet)->lst_parse = parse_lst(line)))
-                exec_lstparse(*objet);
-        }
-        ft_strdel(&line);
-        exit_parsing(&(*objet)->lst_parse , NULL, EXIT_FAILURE);
-    }
-    return (EXIT_SUCCESS);
 }

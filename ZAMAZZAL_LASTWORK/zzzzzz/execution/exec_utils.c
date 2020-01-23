@@ -12,14 +12,6 @@
 
 #include "../includes/exec.h"
 
-char    *ft_getenv(char **environ, char *var)
-{
-    if (!*environ || !var)
-        return (NULL);
-    if (ft_strccmp(*environ, var, '='))
-        return (ft_getenv(&(environ)[1], var));
-    return (ft_strdup(*environ));
-}
 
 static void   create_npath(char *cmd, char **cmd_path, char **path)
 {
@@ -41,8 +33,9 @@ char    *get_path_cmd(char *cmd, char **environ)
     size_t i;
 
     i = 0;
-    if (!(val = ft_getenv(environ, "PATH")))
+    if (!(val = ft_getenv("PATH")))
         return (NULL);
+    printf("zamazzal\n");
     if (!(paths = ft_strsplit(ft_strchr(val, '=') + 1, ':')))
         return (NULL);
     free(val);

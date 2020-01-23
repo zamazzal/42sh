@@ -55,8 +55,6 @@ static int ret_left_fd(t_utils *utils, size_t *start, int *red_type)
     return (0);
 }
 
-#include <readline/readline.h>
-#include <readline/history.h>
 
 static int ret_right_fd(t_utils *utils, size_t *end, int *red_type)
 {
@@ -120,7 +118,7 @@ void    read_herdoc(t_redirections **redirec_aggre)
 
     key = ft_strndup_shell((*redirec_aggre)->file_name, ft_strlen((*redirec_aggre)->file_name));
     ft_strdel(&(*redirec_aggre)->file_name);
-    while ((read = readline("herdoc> ")))
+    while ((read = ft_readline("herdoc> \n")))
     {
         if (!ft_strcmp(read, key))
             break ;

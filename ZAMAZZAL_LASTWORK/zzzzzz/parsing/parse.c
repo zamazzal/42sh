@@ -78,19 +78,19 @@ static int     add_argument(t_parse **lst, t_utils *utils)
     return (1);
 }
 
-t_parse *parse_lst(char *cmd)
+t_parse *parse_lst(char **cmd)
 {
     t_utils *utils;
     t_parse *lst;
     size_t dernier_type = 0;
 
-    if (!cmd || !cmd[0])
+    if (!*cmd || !(*cmd)[0])
         return (NULL);
     if (!(utils = ( t_utils*)ft_memalloc(sizeof(t_utils))))
         return (NULL);
-    if (!cmd || !(lst = (t_parse*)ft_memalloc(sizeof(t_parse))))
+    if (!*cmd || !(lst = (t_parse*)ft_memalloc(sizeof(t_parse))))
         return (NULL);
-    utils->cmd = ft_strdup(cmd);
+    utils->cmd = ft_strdup(*cmd);
     while (1)
     {
         utils->index_arg += ft_skip_sep(&utils->cmd[utils->index_arg], " \t");
@@ -115,5 +115,7 @@ t_parse *parse_lst(char *cmd)
             break ;
         }
     }
+    free(*cmd);
+    *cmd = ft_strdup(utils->cmd);
     return (exit_parsing(&lst, &utils, EXIT_SUCCESS));
 }

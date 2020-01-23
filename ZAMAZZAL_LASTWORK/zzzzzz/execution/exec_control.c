@@ -152,7 +152,8 @@ void    child_job(t_parse *lst, char **environ, int pip[2], int oldpr, int proc_
     if (lst->pipe || proc_nbr > 0)
         close(pip[1]);
     argv = ms_parse(lst->cmd);
-    exec_redirection(lst->lst_reder_aggr, environ);
-    execve(get_path_cmd(argv[0], environ), argv, environ);
+    exec_redirection(lst->lst_reder_aggr, g_environ);
+    execve(get_path_cmd(argv[0], g_environ), argv, g_environ);
+    printf("%s\n", get_path_cmd(argv[0], g_environ));
     exit (EXIT_FAILURE);
 }

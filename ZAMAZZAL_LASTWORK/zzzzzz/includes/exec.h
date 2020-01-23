@@ -14,7 +14,7 @@
 # define EXEC_H
 # include "../includes/parsing.h"
 # include "../includes/get_next_line.h"
-# include "../builtins/builtins.h"
+
 # include <unistd.h>
 # include <sys/wait.h>
 # include <signal.h>
@@ -88,7 +88,6 @@ t_objet **save_objet(void);
 int     ft_perror(char *message);
 char    *get_path_cmd(char *cmd, char **environ);
 void    child_job(t_parse *lst, char **environ, int pip[2], int oldpr, int proc_nbr);
-char    *ft_getenv(char **environ, char *var);
 int     parent_job(int child_pid, int bg);
 
 #endif 

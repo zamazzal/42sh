@@ -23,12 +23,12 @@ void    complet_line(int balance, char **ptr, char **line_addrs)
     char    *tmp;
 
     if (balance == 1)
-        prompt = "dquote> ";
+        prompt = "dquote> \n";
     if (balance == 2)
-        prompt = "quote> ";
+        prompt = "quote> \n";
     if (balance == 4)
-        prompt = "> ";
-    complet = readline(prompt);
+        prompt = "> \n";
+    complet = ft_readline(prompt);
     tmp = *line_addrs;
     *line_addrs = ft_strjoin(tmp, "\n");
     *ptr = &(*line_addrs)[(ft_strlen(*line_addrs) - ft_strlen(*ptr) - 1)];

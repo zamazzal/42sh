@@ -14,6 +14,7 @@
 # define PARSING_H
 # include "../libft/libft.h"
 #include <stdio.h>
+# include "../readline/mysh.h"
 # define PIPE 0x01 //1
 # define AND 0x02 //2
 # define OUR 0x04 //4
@@ -75,7 +76,7 @@ int     is_background(t_parse **parse, t_parse *lst);
 size_t  if_redoraggr(t_redirections **redirec_aggre, t_utils *utils);
 void    complet_type(char **cmd, t_ushort dernier_type);
 t_parse  *exit_parsing(t_parse **lst, t_utils **utils, t_ushort exit);
-t_parse *parse_lst(char *cmd);
+t_parse *parse_lst(char **cmd);
 int     is_near(t_ushort type);
 char    *stock_next_argument(char *cmd, size_t *end_argument, char **line_addr);
 int      ft_strchr_index_shell(char *cmd, char c);

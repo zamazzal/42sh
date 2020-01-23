@@ -39,22 +39,6 @@ int		ft_skipspaces(char *str)
 	return (i);
 }
 
-void	ft_freetable(char ***array)
-{
-	size_t	i;
-	size_t	size;
-
-	i = 0;
-	size = ft_tablen(*array);
-	while (i < size)
-	{
-		free((*array)[i]);
-		i++;
-	}
-	free(*array);
-	(*array) = NULL;
-}
-
 void	ft_putintab(char ***a_chain, char *entry)
 {
 	char	**new;

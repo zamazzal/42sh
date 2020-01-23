@@ -1,22 +1,5 @@
 #include "../includes/exec.h"
 
-int				checkbackslash(char *ptr, int i)
-{
-	int c;
-
-	i--;
-	c = 0;
-	while (i >= 0)
-	{
-		if (ptr[i] == '\\')
-			c++;
-		if (ptr[i] != '\\')
-			break ;
-		i--;
-	}
-	return (c);
-}
-
 static int		ft_getcindex(char *ptr, int c)
 {
 	int i;

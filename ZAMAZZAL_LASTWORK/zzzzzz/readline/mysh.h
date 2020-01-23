@@ -1,6 +1,6 @@
 #ifndef MYSH_H
 # define MYSH_H
-
+int				ft_tablen(char **array);
 # include <curses.h>
 # include <term.h>
 # include <sys/ioctl.h>
@@ -115,6 +115,7 @@ int		ft_checkcinstr(char *ptr, int c);
 int		ft_strinstr(const char *s1, const char *s2, int len);
 char	*ft_strjoin_lite(char *s1, char const *s2);
 char		**ft_addtotab_var(char **tabl, char *str);
+int				checkbackslash(char *ptr, int i);
 
 
 /////////
