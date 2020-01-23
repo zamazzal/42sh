@@ -6,7 +6,7 @@
 /*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 11:23:16 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/10 23:23:02 by hessabra         ###   ########.fr       */
+/*   Updated: 2020/01/23 06:03:06 by hessabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void			ft_nbrdel(int **nbr);
 void			tfree(char ***array);
 int				ft_entier(int x);
 int				ft_parite(int x);
+void			ft_changestr(char **str, char *value, int start, int end);
 int				ft_max(int i, int j);
 void			*ft_memset(void *s, int c, size_t n);
 void			ft_bzero(void *s, size_t n);
