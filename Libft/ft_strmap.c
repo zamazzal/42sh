@@ -3,32 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 20:19:31 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/10 12:14:05 by hessabra         ###   ########.fr       */
+/*   Created: 2019/04/01 07:05:08 by oboualla          #+#    #+#             */
+/*   Updated: 2019/04/19 13:54:39 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmap(char const *str, char (*f)(char))
 {
-	char	*fraiche;
-	int		i;
+	int			i;
+	char		*st2;
+	int			size;
 
+	if (!(str))
+		return (NULL);
+	size = ft_strlen(str);
+	if (!(st2 = (char *)malloc((size + 1) * sizeof(char))))
+		return (NULL);
 	i = 0;
-	if (s == NULL || f == NULL)
-		return (NULL);
-	fraiche = (char *)ft_mmalloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (fraiche == NULL)
-		return (NULL);
-	while (s[i])
+	if (st2)
 	{
-		fraiche[i] = f(s[i]);
-		i++;
+		while (i < size)
+		{
+			st2[i] = f(str[i]);
+			i++;
+		}
+		st2[i] = '\0';
+		return (st2);
 	}
-	fraiche[i] = '\0';
-	return (fraiche);
+	return (NULL);
 }

@@ -3,37 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 22:59:28 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/10 12:14:05 by hessabra         ###   ########.fr       */
+/*   Created: 2019/04/01 07:53:32 by oboualla          #+#    #+#             */
+/*   Updated: 2019/12/05 11:02:46 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+static char	*ret_exist(char *str1, char *str2)
 {
-	char	*swap;
-	int		i;
+	if (str1)
+		return (ft_strdup(str1));
+	if (str2)
+		return (ft_strdup(str2));
+	return (NULL);
+}
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	swap = (char *)ft_mmalloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (swap == NULL)
-		return (NULL);
+char	*ft_strjoin(char *str, char *str2)
+{
+	int			i;
+	char		*fraiche;
+	int			j;
+
 	i = 0;
-	while (s1[i])
+	j = 0;
+	if (!str || !str2)
+		return (ret_exist(str, str2));
+	if (!(fraiche = (char *)ft_memalloc((ft_strlen(str)
+						+ ft_strlen(str2) + 1) * sizeof(char))))
+		return (NULL);
+	if (fraiche)
 	{
-		swap[i] = s1[i];
-		i++;
+		while (str[i])
+		{
+			fraiche[i] = str[i];
+			i++;
+		}
+		while (str2[j])
+			fraiche[i++] = str2[j++];
+		fraiche[i] = '\0';
+		return (fraiche);
 	}
-	while (*s2)
-	{
-		swap[i++] = *s2;
-		s2++;
-	}
-	swap[i] = '\0';
-	return (swap);
+	return (0);
 }

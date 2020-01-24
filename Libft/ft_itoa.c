@@ -3,94 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/07 20:43:38 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/10 12:14:05 by hessabra         ###   ########.fr       */
+/*   Created: 2019/03/31 18:37:31 by oboualla          #+#    #+#             */
+/*   Updated: 2019/04/19 14:01:09 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-static int		compteur(int i)
+static char		*ft_count_size(unsigned int nb, int s)
 {
-	int			n;
-	int			j;
+	char	*str;
+	int		size;
 
-	j = 1;
-	n = 0;
-	if (i < 0)
+	size = 2;
+	str = NULL;
+	while (nb >= 10)
 	{
-		j = 2;
-		i = i * (-1);
+		nb = nb / 10;
+		size++;
 	}
-	while (i != 0)
-	{
-		i = i / 10;
-		n++;
-	}
-	return (n + j);
-}
-
-static char		*wutret(int i)
-{
-	char		*c;
-
-	if (i == 0)
-	{
-		c = "0";
-		return (ft_strdup(c));
-	}
-	if (i == -2147483648)
-	{
-		c = "-2147483648";
-		return (ft_strdup(c));
-	}
+	if (s == 1)
+		str = (char*)malloc(sizeof(char) * size + 1);
+	if (s == 0)
+		str = (char*)malloc(sizeof(char) * size);
+	if (str)
+		return (str);
 	return (NULL);
 }
 
-static	int		signz(int i)
+static char		*ft_convertir(char *str, unsigned int n, int s)
 {
-	int			z;
+	int i;
 
-	z = 0;
-	if (i < 0)
-		z = -1;
-	return (z);
-}
-
-static void		len(int j, int z, char *ret)
-{
-	if (z == -1)
-		ret[j] = '-';
-}
-
-char			*ft_itoa(int i)
-{
-	char		*ret;
-	int			mod;
-	int			n;
-	int			z;
-
-	if (i == 0 || i == -2147483648)
-		return (wutret(i));
-	n = compteur(i);
-	z = signz(i);
-	if (i < 0)
-		i = i * (-1);
-	ret = (char *)ft_mmalloc(sizeof(char) * n);
-	if (ret == NULL)
-		return (NULL);
-	ft_bzero(ret, (size_t)n);
-	n = n - 2;
-	while (i != 0)
+	i = 0;
+	if (n == 0)
 	{
-		mod = i % 10;
-		ret[n] = mod + 48;
-		i = i / 10;
-		n--;
+		str[0] = 0 + '0';
+		i++;
 	}
-	len(n, z, ret);
-	return (ret);
+	else if (n > 0)
+	{
+		while (n > 0)
+		{
+			str[i] = n % 10 + 48;
+			n = n / 10;
+			i++;
+		}
+		if (s == 1)
+		{
+			str[i] = '-';
+			i++;
+		}
+	}
+	str[i] = '\0';
+	ft_rev(str);
+	return (str);
+}
+
+char			*ft_itoa(int n)
+{
+	unsigned	int		nb;
+	char				*str;
+	int					s;
+
+	s = 0;
+	str = NULL;
+	if (n < 0)
+	{
+		n = n * -1;
+		s = 1;
+	}
+	nb = n;
+	str = ft_count_size(nb, s);
+	if (!(str))
+		return (0);
+	ft_convertir(str, nb, s);
+	return (str);
 }

@@ -3,40 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/06 17:19:37 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/10 12:14:05 by hessabra         ###   ########.fr       */
+/*   Created: 2019/03/29 17:34:19 by oboualla          #+#    #+#             */
+/*   Updated: 2019/11/20 05:52:40 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+#include <string.h>
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void		*ft_memmove(void *str1, const void *str2, size_t n)
 {
-	char		*x;
-	const char	*y;
-	char		*z;
-	size_t		i;
+	size_t						i;
+	unsigned char				*s1;
+	unsigned char				*s2;
 
-	x = (char *)dest;
-	y = (const char *)src;
 	i = 0;
-	z = (char *)ft_mmalloc(sizeof(char) * n);
-	if (z == NULL)
+	if (!str1 || !str2)
 		return (NULL);
-	while (i < n)
+	s1 = (unsigned char *)str1;
+	s2 = (unsigned char *)str2;
+	if (s1 < s2)
 	{
-		z[i] = y[i];
-		i++;
+		while (i < n)
+		{
+			s1[i] = s2[i];
+			i++;
+		}
 	}
-	i = 0;
-	while (i < n)
+	else
 	{
-		x[i] = z[i];
-		i++;
+		while (i < n)
+		{
+			s1[n - 1] = s2[n - 1];
+			n--;
+		}
 	}
-	ft_strdel(&z);
-	return (x);
+	return (s1);
 }

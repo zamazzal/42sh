@@ -3,77 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/13 20:10:59 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/10 12:14:05 by hessabra         ###   ########.fr       */
+/*   Created: 2019/04/01 00:01:01 by oboualla          #+#    #+#             */
+/*   Updated: 2019/06/18 03:53:24 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+#include <stdio.h>
 
-static int			nbr_wrd(const char *s, char c)
+static char		*ft_copyword(char *word, int n)
 {
-	int			r;
+	char	*one_word;
+	int		i;
 
-	r = 0;
-	while (*s)
-	{
-		if ((*s != c && *s != '\0') && (*(s + 1) == c || *(s + 1) == '\0'))
-			r++;
-		s++;
-	}
-	return (r);
-}
-
-static int			nbr_ltr(char *s, char c)
-{
-	int			nbr_char;
-
-	nbr_char = 0;
-	while (s[nbr_char] != c && s[nbr_char] != '\0')
-		nbr_char++;
-	return (nbr_char);
-}
-
-static void			cpy(char **chaine, const char **s, char c, int i)
-{
-	int		j;
-
-	j = 0;
-	while (**s != c && **s != '\0')
-	{
-		chaine[i][j] = **s;
-		j++;
-		(*s)++;
-	}
-	chaine[i][j] = '\0';
-}
-
-char				**ft_strsplit(char const *s, char c)
-{
-	char		**chaine;
-	int			i;
-
-	if (s == NULL)
-		return (NULL);
-	chaine = (char **)ft_mmalloc(sizeof(char *) * (nbr_wrd(s, c) + 1));
-	if (chaine == NULL)
-		return (NULL);
 	i = 0;
-	while (*s)
+	if (!(word))
+		return (NULL);
+	if (!(one_word = ft_strnew(n - i)))
+		return (NULL);
+	while (word[i] != '\0' && i < n)
 	{
-		while (*s == c && *s)
-			s++;
-		if (*s == '\0')
-			break ;
-		chaine[i] = (char *)ft_mmalloc(sizeof(char) * (nbr_ltr((char *)s, c) + 1));
-		if (chaine == NULL)
-			return (NULL);
-		cpy(chaine, &s, c, i);
+		one_word[i] = word[i];
 		i++;
 	}
-	chaine[i] = 0;
-	return (chaine);
+	one_word[i] = '\0';
+	return (one_word);
+}
+
+static char		**ft_remplir(char **tab, char *s, char c)
+{
+	int i;
+	int j;
+	int flag;
+
+	flag = 0;
+	i = -1;
+	j = 0;
+	if (!s)
+		return (0);
+	while (s[++i])
+	{
+		if (s[i] != c && flag == 0)
+		{
+			tab[j++] = ft_copyword(&s[i], ft_wordlen(s + i, c));
+			flag = 1;
+		}
+		else if (s[i] == c)
+			flag = 0;
+	}
+	tab[j] = 0;
+	return (tab);
+}
+
+char			**ft_strsplit(char const *s, char c)
+{
+	char		**tab;
+	char		*src;
+
+	src = (char *)s;
+	if (!(src))
+		return (0);
+	if (!(tab = (char**)malloc(sizeof(char *) * (ft_count_word(src, c) + 1))))
+		return (0);
+	ft_remplir(tab, src, c);
+	return (tab);
 }

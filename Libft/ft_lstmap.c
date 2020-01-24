@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/18 00:22:10 by hessabra          #+#    #+#             */
-/*   Updated: 2018/10/18 00:49:00 by hessabra         ###   ########.fr       */
+/*   Created: 2019/04/07 21:16:58 by oboualla          #+#    #+#             */
+/*   Updated: 2019/08/07 20:52:25 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list		*new;
-	t_list		*l;
-	t_list		*l_n;
+	t_list *li;
+	t_list *lili;
 
-	if (lst == NULL || f == NULL)
+	if (!(lili = (t_list*)malloc(sizeof(t_list))))
 		return (NULL);
-	l = lst;
-	l_n = f(l);
-	new = l_n;
-	l = l->next;
-	while (l != NULL)
+	if (!(lst))
+		return (NULL);
+	lili = (*f)(lst);
+	lst = lst->next;
+	li = lili;
+	if (lili)
 	{
-		new->next = f(l);
-		new = new->next;
-		l = l->next;
+		while (lst)
+		{
+			li->next = (*f)(lst);
+			lst = lst->next;
+			li = li->next;
+		}
+		li->next = NULL;
+		return (lili);
 	}
-	return (l_n);
+	return (NULL);
 }

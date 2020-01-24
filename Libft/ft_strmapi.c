@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 20:30:14 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/10 12:14:05 by hessabra         ###   ########.fr       */
+/*   Created: 2019/04/01 08:31:12 by oboualla          #+#    #+#             */
+/*   Updated: 2019/04/06 14:21:03 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *str, char (*f)(unsigned int i, char c))
 {
-	char	*fraiche;
-	int		i;
+	int			i;
+	int			size;
+	char		*tab;
 
+	if (str == NULL)
+		return (0);
+	size = ft_strlen(str);
+	if (!(tab = (char *)malloc(sizeof(char) + 1 * size)))
+		return (NULL);
 	i = 0;
-	if (s == NULL || f == NULL)
-		return (NULL);
-	fraiche = (char *)ft_mmalloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (fraiche == NULL)
-		return (NULL);
-	while (s[i])
+	while (i < size)
 	{
-		fraiche[i] = f(i, s[i]);
+		tab[i] = f(i, str[i]);
 		i++;
 	}
-	fraiche[i] = '\0';
-	return (fraiche);
+	tab[i] = '\0';
+	return (tab);
 }

@@ -3,89 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/06 00:44:08 by hessabra          #+#    #+#             */
-/*   Updated: 2019/02/03 02:52:28 by hessabra         ###   ########.fr       */
+/*   Created: 2019/03/28 18:38:18 by oboualla          #+#    #+#             */
+/*   Updated: 2019/11/20 06:00:00 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
-const char		*fonction(const char *nptr, int x)
+int		ft_atoi(const char *str)
 {
-	int		y;
-	char	*z;
-	int		i;
+	unsigned int		a;
+	int					b;
+	int					i;
 
-	i = 0;
-	z = (char *)nptr + x;
-	nptr = z;
-	while (z[i])
-	{
-		y = (int)z[i];
-		if (!(ft_isdigit(y)))
-		{
-			nptr = ft_searchnreplace(z, y, 0);
-			break ;
-		}
-		i++;
-	}
-	if (nptr[0] == '-')
-		return (nptr + 1);
-	return (nptr);
-}
-
-static int		rac(const char *nptr, int sign)
-{
-	int		i;
-	int		ret;
-
-	i = 0;
-	ret = 0;
-	if (sign == 1 && ft_strcmp(nptr, "9223372036854775807") >= 0
-			&& ft_strlen(nptr) >= 19)
-		return (-1);
-	else if (sign == -1 && ft_strcmp(nptr, "9223372036854775808") >= 0
-			&& ft_strlen(nptr) >= 19)
+	if (!str)
 		return (0);
-	else
-	{
-		if (nptr[0] == '-' || nptr[0] == '+')
-			i = 1;
-		while (nptr[i])
-		{
-			ret = ret * 10 + (nptr[i] - 48);
-			i++;
-		}
-		return (ret);
-	}
-}
-
-int				ft_atoi(const char *nptr)
-{
-	int		i;
-	int		sign;
-	int		ret;
-	int		x;
-	int		y;
-
+	b = 1;
+	a = 0;
 	i = 0;
-	sign = 1;
-	while ((nptr[i] > 7 && nptr[i] < 14) || nptr[i] == ' ')
-		i++;
-	if (nptr[i] == '-')
-		sign = -1;
-	if (nptr[i] == '+' || nptr[i] == '-')
-		i++;
-	x = i;
-	nptr = fonction(nptr, x);
-	y = (int)nptr[0];
-	if (ft_isdigit(y))
+	i = ft_skip_sep(str, " \t\v\n\r\f");
+	if (str[i] == '-' || str[i] == '+')
 	{
-		ret = rac(nptr, sign);
-		return (sign * ret);
+		if (str[i] == '-')
+			b = -1;
+		i++;
 	}
-	return (0);
+	while ((str[i] >= '0' && str[i] <= '9') && str[i])
+	{
+		a = a * 10 + str[i] - '0';
+		i++;
+	}
+	return (a * b);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/06 00:20:04 by hessabra          #+#    #+#             */
-/*   Updated: 2018/10/06 11:08:42 by hessabra         ###   ########.fr       */
+/*   Created: 2019/03/28 21:29:00 by oboualla          #+#    #+#             */
+/*   Updated: 2019/04/01 13:38:31 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+int		ft_tolower(int arg)
 {
-	if (c > 64 && c < 91)
-		return (c + 32);
-	return (c);
+	if (arg >= 'A' && arg <= 'Z')
+		return (arg + 32);
+	return (arg);
 }

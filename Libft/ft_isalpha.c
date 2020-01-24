@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hessabra <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: oboualla <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/05 23:23:15 by hessabra          #+#    #+#             */
-/*   Updated: 2018/10/05 23:32:18 by hessabra         ###   ########.fr       */
+/*   Created: 2019/03/28 20:45:07 by oboualla          #+#    #+#             */
+/*   Updated: 2019/05/21 05:44:58 by oboualla         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalpha(int c)
+int		ft_isalpha(int argument)
 {
-	if ((c > 64 && c < 91) || (c > 96 && c < 123))
+	if (argument >= 'A' && argument <= 'Z')
 		return (1);
-	return (0);
+	if (argument >= 'a' && argument <= 'z')
+		return (1);
+	else
+		return (0);
 }
