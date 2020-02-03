@@ -1,17 +1,17 @@
-/* ************************************************************************************************ */
-/*                                                                                                  */
-/*                                                        :::   ::::::::   ::::::::  :::::::::::    */
-/*   alias_replace.c                                   :+:+:  :+:    :+: :+:    :+: :+:     :+:     */
-/*                                                      +:+         +:+        +:+        +:+       */
-/*   By: sopu <sopu@student.1337.ma>                   +#+      +#++:      +#++:        +#+         */
-/*                                                    +#+         +#+        +#+      +#+           */
-/*   Created: 2020/01/31 07:53:14 by sopu            #+#  #+#    #+# #+#    #+#     #+#             */
-/*   Updated: 2020/01/31 07:53:14 by sopu         ####### ########   ########      ###.ma           */
-/*                                                                                                  */
-/* ************************************************************************************************ */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   alias_replace.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/03 12:57:34 by hessabra          #+#    #+#             */
+/*   Updated: 2020/02/03 13:14:06 by hessabra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../../Includes/alias_unalias.h"
-
+#include <stdio.h>
 
 void			ft_zaapquote(char *line, int *i, int *len)
 {
@@ -116,7 +116,7 @@ char			**ft_getcmds(char *line, int *isodd)
 			cmds = ft_addtotab(cmds, tmp);
 			ft_strdel(&tmp);
 		}
-		else;sd
+		else
 		{
 			len = ft_lenarg(line, &i, &j);
 			printf("\n LEN == %d\n", len);
@@ -130,21 +130,24 @@ char			**ft_getcmds(char *line, int *isodd)
 	return (cmds);
 }
 
-char			*ft_replacealiass(char ***cmds, char **allaliases, int isodd)
+void			ft_replacealiass(char **line, char **allaliases)
 {
-	int	i;
-	char	**loopdetector;
-	char	*line;
+	int			i;
+	int			isodd;
+	char		**loopdetector;
+	char		**cmds;
 
+	cmds = ft_getcmds(*line, &isodd);
+	ft_strdel(line);
 	loopdetector = (char **)malloc(sizeof(char *));
 	loopdetector[0] = 0;
-	while (*cmds[i])
+	i = 0;
+	while (cmds[i])
 	{
 		if (i % 2 == isodd)
-			*cmds[i] = ft_getaliasvalue(*cmds[i], allaliases, loopdetector);
+			cmds[i] = ft_getaliasvalue(cmds[i], allaliases, loopdetector);
 		i++;
 	}
-	ft_dfre(loopdetector);
-	line = ft_tabtostr(*cmds);
-	return (line);
+	dfre(loopdetector);
+	*line = ft_tabtostr(cmds);
 }

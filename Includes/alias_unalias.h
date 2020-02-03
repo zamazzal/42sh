@@ -6,7 +6,7 @@
 /*   By: hessabra <hessabra@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/09 12:21:54 by hessabra          #+#    #+#             */
-/*   Updated: 2020/01/12 18:53:53 by hessabra         ###   ########.fr       */
+/*   Updated: 2020/02/03 13:01:47 by hessabra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void		ft_addalias(char *alias_arg, char ***all_aliases);
 
 int			ft_unaliasoption(char *arg);
 char		*ft_getaliasvalue(char *arg, char **all_aliases,
-									char **loopdetector);s
+									char **loopdetector);
 
 #endif

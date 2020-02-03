@@ -18,6 +18,6 @@
 int			alias(char **arg, char ***all_aliases);
 int			unalias(char **arg, char ***all_aliases);
 int			ft_parameters(char **param_arg, char ***all_params);
-char		*ft_replacealiass(char ***cmds, char **allaliases, int isodd)
+void		ft_replacealiass(char **line, char **allaliases);
 
 #endif

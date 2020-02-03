@@ -21,7 +21,7 @@ char		*ft_tabtostr(char **tab)
 	str = ft_strdup("");
 	while (tab[i])
 	{
-		if (i && tab[i + 1])
+		if (i)
 			str = ft_jandf(str, " ", 1, 0);
 		str = ft_jandf(str, tab[i], 1, 0);
 		i++;
