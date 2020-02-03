@@ -125,5 +125,6 @@ char		*ft_getaliasvalue(char *arg, char **all_aliases,
 	}
 	else
 		ft_strdel(&tmp);
+	ft_strdel(&arg);
 	return (value);
 }

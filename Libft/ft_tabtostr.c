@@ -1,23 +1,31 @@
 /* ************************************************************************************************ */
 /*                                                                                                  */
 /*                                                        :::   ::::::::   ::::::::  :::::::::::    */
-/*   shell.h                                           :+:+:  :+:    :+: :+:    :+: :+:     :+:     */
+/*   ft_tabtostr.c                                     :+:+:  :+:    :+: :+:    :+: :+:     :+:     */
 /*                                                      +:+         +:+        +:+        +:+       */
 /*   By: sopu <sopu@student.1337.ma>                   +#+      +#++:      +#++:        +#+         */
 /*                                                    +#+         +#+        +#+      +#+           */
-/*   Created: Invalid date        by                 #+#  #+#    #+# #+#    #+#     #+#             */
-/*   Updated: 2020/02/02 14:46:26 by sopu         ####### ########   ########      ###.ma           */
+/*   Created: 2020/02/02 14:02:06 by sopu            #+#  #+#    #+# #+#    #+#     #+#             */
+/*   Updated: 2020/02/02 14:02:06 by sopu         ####### ########   ########      ###.ma           */
 /*                                                                                                  */
 /* ************************************************************************************************ */
 
-#ifndef SHELL_H
-# define SHELL_H
+#include "libft.h"
 
-# include "../Libft/libft.h"
+char		*ft_tabtostr(char **tab)
+{
+	int		i;
+	char	*str;
 
-int			alias(char **arg, char ***all_aliases);
-int			unalias(char **arg, char ***all_aliases);
-int			ft_parameters(char **param_arg, char ***all_params);
-char		*ft_replacealiass(char ***cmds, char **allaliases, int isodd)
-
-#endif
+	i = 0;
+	str = ft_strdup("");
+	while (tab[i])
+	{
+		if (i && tab[i + 1])
+			str = ft_jandf(str, " ", 1, 0);
+		str = ft_jandf(str, tab[i], 1, 0);
+		i++;
+	}
+	dfre(tab);
+	return (str);
+}

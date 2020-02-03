@@ -24,5 +24,7 @@ int			ft_aliasoption(char *arg);
 void		ft_addalias(char *alias_arg, char ***all_aliases);
 
 int			ft_unaliasoption(char *arg);
+char		*ft_getaliasvalue(char *arg, char **all_aliases,
+									char **loopdetector);s
 
 #endif
